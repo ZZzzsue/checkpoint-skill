@@ -24,8 +24,8 @@ The file format is plain markdown — any agent can read a checkpoint written by
 | Agent | Load skill | Then use |
 |---|---|---|
 | Hermes | `/checkpoint` (auto-registered via skill system) | bare-text commands |
-| Claude Code | `/checkpoint` or tell agent to load it | bare-text commands |
-| Codex | `/use checkpoint` | bare-text commands |
+| Claude Code | `/checkpoint` | bare-text commands |
+| Codex | `/checkpoint` | bare-text commands |
 
 **All three agents use identical bare-text trigger commands.** Custom slash commands are intentionally NOT used — Codex does not support them, and bare-text is the only genuinely cross-agent approach.
 
@@ -37,7 +37,7 @@ The file format is plain markdown — any agent can read a checkpoint written by
 ```
 When the user types mdw-<name>, mdr-<name>, or mdl (as a standalone message),
 load and follow the checkpoint skill conventions:
-  mdw-<name>   write checkpoint → ~/.hermes/checkpoints/<name>.md
+  mdw-<name>   write checkpoint → ~/checkpoints/<name>.md
   mdr-<name>   read checkpoint, summarize, offer to resume
   mdl          list all checkpoints with timestamps
 Keep files under 80 lines. No secrets, no raw outputs.
@@ -46,7 +46,7 @@ Keep files under 80 lines. No secrets, no raw outputs.
 **Codex**: Add to `~/.codex/AGENTS.md`:
 ```
 Checkpoint commands (plain text — Codex does not support custom slash commands):
-  mdw-<name>   write checkpoint → ~/.hermes/checkpoints/<name>.md
+  mdw-<name>   write checkpoint → ~/checkpoints/<name>.md
   mdr-<name>   read checkpoint, summarize, offer to resume
   mdl          list all checkpoints with timestamps
 Only trigger when the user's entire message is exactly the command.
@@ -57,10 +57,10 @@ Keep files under 80 lines. No secrets, no raw outputs.
 
 ## Storage
 
-All checkpoint files live in `~/.hermes/checkpoints/`.
-Create the directory on first use: `mkdir -p ~/.hermes/checkpoints/`
+All checkpoint files live in `~/checkpoints/`.
+Create the directory on first use: `mkdir -p ~/checkpoints/`
 
-File naming: `mdw-foo` → `~/.hermes/checkpoints/foo.md`
+File naming: `mdw-foo` → `~/checkpoints/foo.md`
 
 ---
 
@@ -71,14 +71,14 @@ File naming: `mdw-foo` → `~/.hermes/checkpoints/foo.md`
 | `mdw-<name>` | yes (first call) | recommended for long sessions | Write/overwrite checkpoint |
 | `mdw-<name> [note]` | yes (first call) | recommended | Write checkpoint + append note |
 | `mdr-<name>` | no | no | Read file + summarize 2-3 lines |
-| `mdl` | no | no | `ls -lt ~/.hermes/checkpoints/` |
+| `mdl` | no | no | `ls -lt ~/checkpoints/` |
 
 - `mdr-` and `mdl`: execute directly, do NOT call skill_view, no thinking needed.
 - `mdw-`: load skill only on first call per session; if already loaded, use cached template.
 - Thinking mode for `mdw-` helps on sessions >30 messages or complex multi-phase tasks.
 
 **Activation requirement**: All trigger commands only activate when this skill is already
-loaded in the session (via `/checkpoint` in Hermes, `/use checkpoint` in Codex, or
+loaded in the session (via `/checkpoint` in Hermes, Claude Code, or Codex).
 explicit load in Claude Code). Do NOT trigger on bare keywords appearing in normal
 conversation, code snippets, or explanations.
 
@@ -177,17 +177,17 @@ Rule: if removing a middle item doesn't change what the next agent does, drop it
 
 Use the write_file tool (Hermes) or file write capability (Claude Code / Codex):
 ```
-path: ~/.hermes/checkpoints/<name>.md
+path: ~/checkpoints/<name>.md
 content: [generated markdown]
 ```
 
-Confirm to user: "Checkpoint saved → ~/.hermes/checkpoints/<name>.md ([N] lines)"
+Confirm to user: "Checkpoint saved → ~/checkpoints/<name>.md ([N] lines)"
 
 ---
 
 ## Reading a Checkpoint (`mdr-<name>`)
 
-1. Read `~/.hermes/checkpoints/<name>.md`
+1. Read `~/checkpoints/<name>.md`
 2. Announce to user: "Loaded checkpoint [name] (saved: [timestamp])"
 3. Summarize in 2-3 sentences: goal + current status + immediate next step
 4. Ask: "Resume from Next Steps item 1, or different starting point?"
