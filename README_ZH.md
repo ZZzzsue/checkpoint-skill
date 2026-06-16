@@ -42,7 +42,7 @@ mkdir -p ~/.claude/skills/checkpoint && \
 curl -sL https://raw.githubusercontent.com/ZZzzsue/checkpoint-skill/main/SKILL.md \
   > ~/.claude/skills/checkpoint/SKILL.md
 ```
-安装后用 `/use checkpoint` 加载。
+安装后用 `/checkpoint` 加载。
 
 ### Codex
 ```bash
@@ -50,7 +50,7 @@ mkdir -p ~/.codex/skills/checkpoint && \
 curl -sL https://raw.githubusercontent.com/ZZzzsue/checkpoint-skill/main/SKILL.md \
   > ~/.codex/skills/checkpoint/SKILL.md
 ```
-安装后用 `/use checkpoint` 加载。
+安装后用 `/checkpoint` 加载。
 
 ---
 
@@ -88,7 +88,7 @@ curl -sL https://raw.githubusercontent.com/ZZzzsue/checkpoint-skill/main/SKILL.m
 
 ## 📄 检查点格式
 
-文件保存在 `~/.hermes/checkpoints/<name>.md`
+文件保存在 `~/checkpoints/<name>.md`
 
 ```markdown
 # myproject · checkpoint
