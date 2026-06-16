@@ -61,8 +61,8 @@ After install, use `/use checkpoint` to load.
 | Agent | Command |
 |-------|---------|
 | Hermes | `/checkpoint` |
-| Claude Code | `/use checkpoint` |
-| Codex | `/use checkpoint` |
+| Claude Code | `/checkpoint` |
+| Codex | `/checkpoint` |
 
 ### Step 2 — Use commands
 
