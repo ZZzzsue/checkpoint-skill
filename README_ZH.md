@@ -61,8 +61,8 @@ curl -sL https://raw.githubusercontent.com/ZZzzsue/checkpoint-skill/main/SKILL.m
 | Agent | 命令 |
 |-------|------|
 | Hermes | `/checkpoint` |
-| Claude Code | `/use checkpoint` |
-| Codex | `/use checkpoint` |
+| Claude Code | `/checkpoint` |
+| Codex | `/checkpoint` |
 
 ### 第二步：使用命令
 
